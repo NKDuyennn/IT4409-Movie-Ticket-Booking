@@ -7,26 +7,23 @@
 - Chạy file: `backend/database/create_database.sql`
 
 ### 2. Chạy Backend
+Lưu ý dùng python 3.10
 ```bash
 cd backend
 pip install -r requirements.txt
 python app.py
 ```
 
-### 3. Mở Frontend
-- Mở `frontend/sign_in.html` bằng Live Server (port 5500)
-
 ## Tài khoản mẫu
-- **Admin**: admin@myshowz.com / admin123
-- **User**: user@myshowz.com / user123
+- **Admin**: admin@gmail.com / 123456
+- **User**: user@gmail.com / 123456
 
 ## API Endpoints
 - `POST /api/auth/register` - Đăng ký
-- `POST /api/auth/login` - Đăng nhập
+- `POST /api/auth/login` - Đăng nhập  
 - `GET /api/auth/me` - Thông tin user (cần token)
 
 ## Database: movie_ticket
 - MySQL: root/123456 @ localhost:3306
-- Backend: http://localhost:5000
-- Frontend: http://localhost:5500
+- App: http://localhost:5000
 
