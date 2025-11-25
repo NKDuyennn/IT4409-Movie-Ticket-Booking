@@ -1,0 +1,360 @@
+# ========================================
+# MyShowz Movie Ticket Booking - .gitignore
+# ========================================
+
+# ============ SENSITIVE FILES ============
+# Environment variables - KHÔNG ĐƯỢC COMMIT!
+.env
+.env.local
+.env.*.local
+*.env
+
+# Database credentials
+database.ini
+db_config.json
+
+# API Keys & Secrets
+secrets.json
+credentials.json
+*.pem
+*.key
+*.cert
+
+# ============ PYTHON ============
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+myenv/
+.venv/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff (nếu dùng Django sau này)
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff
+instance/
+.webassets-cache
+flask_session/
+
+# Scrapy stuff
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# ============ DATABASE ============
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# MySQL dumps
+*.sql.backup
+*.sql.bak
+backup_*.sql
+dump_*.sql
+
+# Database migrations (nếu không muốn commit)
+# Uncomment nếu muốn ignore migrations
+# backend/database/migrations/versions/*.py
+# !backend/database/migrations/versions/__init__.py
+
+# ============ LOGS ============
+# Log files
+logs/
+*.log
+log.txt
+error.log
+access.log
+debug.log
+*.log.*
+
+# ============ UPLOADS & USER DATA ============
+# Upload directories
+uploads/*
+!uploads/.gitkeep
+uploads/movies/*
+!uploads/movies/.gitkeep
+uploads/users/*
+!uploads/users/.gitkeep
+uploads/temp/*
+
+# User generated content
+media/
+static/uploads/
+
+# ============ IDE & EDITORS ============
+# Visual Studio Code
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm
+.idea/
+.idea/*
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*~
+*.swp
+*.swo
+*.swn
+.*.sw?
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Atom
+.atom/
+
+# ============ OPERATING SYSTEMS ============
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.stackdump
+
+# Linux
+.directory
+.Trash-*
+.nfs*
+
+# ============ FRONTEND ============
+# Node modules (nếu dùng Node.js build tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Build outputs
+/dist
+/build
+/.next
+/out
+
+# Dependencies
+package-lock.json
+yarn.lock
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Misc
+.DS_Store
+*.pem
+
+# ============ BACKUP & TEMPORARY FILES ============
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*.tmp
+*.temp
+*~
+~*
+
+# Archive files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# ============ SECURITY & CERTIFICATES ============
+# SSL Certificates
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+
+# SSH Keys
+id_rsa
+id_rsa.pub
+id_dsa
+id_dsa.pub
+
+# ============ CACHE ============
+# Cache directories
+.cache/
+cache/
+tmp/
+temp/
+.tmp/
+
+# ============ DOCUMENTATION ============
+# Generated documentation (nếu không muốn commit)
+# docs/build/
+# docs/_build/
+
+# ============ DEPLOYMENT ============
+# Deployment configs (nếu chứa sensitive data)
+# docker-compose.override.yml
+# .dockerignore
+
+# Kubernetes secrets
+# secrets.yaml
+# *.secret.yaml
+
+# ============ TESTING ============
+# Test results
+test-results/
+coverage/
+.nyc_output/
+
+# ============ CUSTOM PROJECT SPECIFIC ============
+# MyShowz specific
+backend/.env
+backend/uploads/
+backend/logs/
+backend/instance/
+
+# Ignore compiled frontend assets (nếu có build process)
+# frontend/dist/
+# frontend/build/
+
+# ============ KEEP THESE FILES ============
+# Đảm bảo các file này được commit
+!.gitignore
+!.env.example
+!backend/.env.example
+!README.md
+!requirements.txt
+!backend/requirements.txt
+
+# Keep empty directories với .gitkeep
+!**/.gitkeep
