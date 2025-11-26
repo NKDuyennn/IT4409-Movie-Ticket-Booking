@@ -1,5 +1,5 @@
-// Backend API URL - Tự động detect
-const API_URL = window.location.origin + '/api';
+// Backend API URL - From config
+const API_URL = CONFIG.API_URL;
 
 const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');

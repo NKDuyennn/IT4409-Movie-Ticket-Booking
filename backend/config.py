@@ -32,9 +32,9 @@ class Config:
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=int(os.environ.get('JWT_ACCESS_TOKEN_EXPIRES', '86400')))  # 24 hours
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(seconds=int(os.environ.get('JWT_REFRESH_TOKEN_EXPIRES', '2592000')))  # 30 days
     
-    # CORS config
-    cors_origins = os.environ.get('CORS_ORIGINS', '*')
-    CORS_ORIGINS = [cors_origins] if cors_origins != '*' else ['*']
+    # CORS config - Allow frontend running on different port
+    cors_origins = os.environ.get('CORS_ORIGINS', 'http://localhost:3000')
+    CORS_ORIGINS = [origin.strip() for origin in cors_origins.split(',')] if cors_origins != '*' else ['*']
     
     # Upload config
     UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', 'uploads')

@@ -1,20 +1,17 @@
 """
 Flask Application Main File
-MyShowz - Movie Ticket Booking System
+MyShowz - Movie Ticket Booking System - Backend API Only
 """
 
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from config import Config
 from database.db import init_db
 import os
 
-# Khởi tạo Flask app
-# Đặt folder frontend làm static folder
-app = Flask(__name__, 
-            static_folder='../frontend',
-            static_url_path='')
+# Khởi tạo Flask app - Backend API Only
+app = Flask(__name__)
 app.config.from_object(Config)
 
 # Cấu hình CORS
@@ -79,44 +76,20 @@ def missing_token_callback(error):
     }), 401
 
 
-# Root endpoint - Redirect to frontend
+# API Root endpoint
 @app.route('/')
 def index():
-    return send_from_directory('../frontend', 'index.html')
+    return jsonify({
+        'success': True,
+        'message': 'Welcome to MyShowz API',
+        'version': '1.0.0',
+        'endpoints': {
+            'auth': '/api/auth',
+            'health': '/api/health',
+            'info': '/api'
+        }
+    }), 200
 
-# Serve frontend pages
-@app.route('/sign_in.html')
-def sign_in():
-    return send_from_directory('../frontend', 'sign_in.html')
-
-@app.route('/index.html')
-def home():
-    return send_from_directory('../frontend', 'index.html')
-
-@app.route('/movies.html')
-def movies():
-    return send_from_directory('../frontend', 'movies.html')
-
-@app.route('/about.html')
-def about():
-    return send_from_directory('../frontend', 'about.html')
-
-@app.route('/Contact_Us.html')
-def contact():
-    return send_from_directory('../frontend', 'Contact_Us.html')
-
-@app.route('/ticket-booking.html')
-def ticket_booking():
-    return send_from_directory('../frontend', 'ticket-booking.html')
-
-@app.route('/e-ticket.html')
-def e_ticket():
-    return send_from_directory('../frontend', 'e-ticket.html')
-
-# Serve seat selection page
-@app.route('/seat_selection/seat_sel.html')
-def seat_selection():
-    return send_from_directory('../frontend/seat_selection', 'seat_sel.html')
 
 # API info endpoint
 @app.route('/api')
@@ -144,22 +117,19 @@ def health():
 
 if __name__ == '__main__':
     print("=" * 70)
-    print("🎬 MyShowz Server Starting...")
+    print("🎬 MyShowz Backend API Starting...")
     print("=" * 70)
-    print(f"🌐 Frontend: http://localhost:5000")
-    print(f"   ├─ Home Page:   http://localhost:5000/")
-    print(f"   ├─ Sign In:     http://localhost:5000/sign_in.html")
-    print(f"   └─ Movies:      http://localhost:5000/movies.html")
-    print(f"")
-    print(f"🔧 Backend API: http://localhost:5000/api")
+    print(f"🔧 Backend API: http://localhost:5000")
+    print(f"   ├─ Root:        http://localhost:5000/")
+    print(f"   ├─ API Info:    http://localhost:5000/api")
     print(f"   ├─ Health:      http://localhost:5000/api/health")
     print(f"   ├─ Register:    POST /api/auth/register")
     print(f"   └─ Login:       POST /api/auth/login")
     print(f"")
     print(f"🗄️  Database: movie_ticket (MySQL)")
     print("=" * 70)
-    print("✨ Chỉ cần chạy: python app.py")
-    print("✨ Mở trình duyệt: http://localhost:5000")
+    print("💡 Chạy backend: cd backend && python app.py")
+    print("💡 Chạy frontend: cd frontend && python server.py")
     print("=" * 70)
     app.run(debug=True, host='0.0.0.0', port=5000)
 

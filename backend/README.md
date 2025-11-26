@@ -1,14 +1,24 @@
 # MyShowz Backend API
 
-Backend API cho hệ thống đặt vé xem phim MyShowz, xây dựng bằng Flask.
+Backend API thuần túy cho hệ thống đặt vé xem phim MyShowz, xây dựng bằng Flask.
 
-## Cài đặt
+## 🎯 Tính năng
+
+- ✅ RESTful API thuần túy (không serve frontend)
+- ✅ JWT Authentication (Access + Refresh Token)
+- ✅ Role-based Authorization (User/Admin)
+- ✅ CORS enabled cho frontend riêng biệt
+- ✅ MySQL Database với SQLAlchemy ORM
+- ✅ Password hashing với Bcrypt
+- ✅ Input validation
+
+## 📦 Cài đặt
 
 ### 1. Tạo Database MySQL
 
 Mở MySQL Workbench và chạy file SQL:
-```sql
--- Chạy file: database/create_database.sql
+```bash
+# Chạy file: database/create_database.sql
 ```
 
 Database sẽ được tạo với tên: **movie_ticket**
@@ -16,16 +26,46 @@ Database sẽ được tạo với tên: **movie_ticket**
 ### 2. Cài đặt Dependencies
 
 ```bash
+cd backend
 pip install -r requirements.txt
 ```
 
-### 3. Chạy Server
+### 3. Cấu hình Environment (Tùy chọn)
+
+Tạo file `.env` trong thư mục backend:
+```env
+# Database
+DB_USER=root
+DB_PASSWORD=123456
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=movie_ticket
+
+# Security
+SECRET_KEY=your-secret-key
+JWT_SECRET_KEY=your-jwt-secret-key
+
+# CORS - Allow frontend domain
+CORS_ORIGINS=http://localhost:3000
+```
+
+### 4. Chạy Server
 
 ```bash
 python app.py
 ```
 
-Server sẽ chạy tại: **http://localhost:5000**
+✅ Server chạy tại: **http://localhost:5000**
+✅ API Endpoints: **http://localhost:5000/api**
+
+```
+🔧 Backend API: http://localhost:5000
+   ├─ Root:        http://localhost:5000/
+   ├─ API Info:    http://localhost:5000/api
+   ├─ Health:      http://localhost:5000/api/health
+   ├─ Register:    POST /api/auth/register
+   └─ Login:       POST /api/auth/login
+```
 
 ## Cấu hình
 
@@ -33,7 +73,7 @@ File `config.py` chứa các cấu hình:
 
 - **Database**: MySQL (root/123456@localhost:3306/movie_ticket)
 - **JWT Token**: Access token 24h, Refresh token 30 ngày
-- **CORS**: Cho phép localhost:5500, 127.0.0.1:5500
+- **CORS**: Cho phép frontend chạy tại `http://localhost:3000` (mặc định)
 
 Có thể thay đổi bằng biến môi trường (.env file).
 

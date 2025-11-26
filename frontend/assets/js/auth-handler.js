@@ -6,7 +6,7 @@
 (function() {
     'use strict';
     
-    const API_URL = window.location.origin + '/api';
+    const API_URL = CONFIG.API_URL;
     
     /**
      * Lấy thông tin user từ localStorage
