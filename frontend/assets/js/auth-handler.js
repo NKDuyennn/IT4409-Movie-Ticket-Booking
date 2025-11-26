@@ -113,7 +113,7 @@
                         <i class="fa fa-ticket" style="margin-right: 10px; width: 20px;"></i> My Bookings
                     </a>
                     ${user.role === 'admin' ? `
-                    <a href="#" class="dropdown-item" style="
+                    <a href="admin/dashboard.html" class="dropdown-item" style="
                         display: block;
                         padding: 14px 15px;
                         color: var(--theme-title);

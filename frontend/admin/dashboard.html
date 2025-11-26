@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin Dashboard - MyShowz</title>
+  <link rel="stylesheet" href="../assets/css/style-starter.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1>Admin <span style="color: #ff4b2b;">Dashboard</span></h1>
+        <p>Welcome back, manage your movie booking system</p>
+      </div>
+
+      <!-- Stats Grid -->
+      <div id="stats" class="stats-grid">
+        <!-- Stats cards will be populated by JS -->
+      </div>
+
+      <!-- Dynamic Content Section -->
+      <div id="admin-content" class="content-section">
+        <div class="content-section-header">
+          <h2>Recent Activity</h2>
+        </div>
+        <div id="content-grid" class="content-grid">
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <i class="fa fa-line-chart"></i>
+            <h3>Recent Activity</h3>
+            <p>Recent bookings and activities will be displayed here</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Templates -->
+  <template id="stat-card-template">
+    <div class="stat-card">
+      <div class="stat-card-header">
+        <div class="stat-card-title"></div>
+        <div class="stat-card-icon"><i class="fa"></i></div>
+      </div>
+      <div class="stat-card-value"></div>
+      <div class="stat-card-change"><i class="fa fa-arrow-up"></i> <span></span></div>
+    </div>
+  </template>
+
+  <template id="empty-state-template">
+    <div class="empty-state" style="grid-column: 1/-1;">
+      <i class="fa"></i>
+      <h3></h3>
+      <p></p>
+    </div>
+  </template>
+    </main>
+  </div>
+
+  <script src="../assets/js/jquery-1.9.1.min.js"></script>
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/auth-handler.js"></script>
+  <script src="assets/js/admin-common.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
