@@ -1,0 +1,247 @@
+/* Seat Management Components */
+
+/* Seat Modal Toolbar */
+.seat-modal-toolbar {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.seat-type-changer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.seat-modal-toolbar select {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  color: white;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+.seat-modal-toolbar select option {
+  background: #2a2d3e;
+  color: white;
+}
+
+/* Add Seats Dropdown */
+.add-seats-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: rgba(26, 26, 46, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  top: 100%;
+  left: 0;
+  backdrop-filter: blur(10px);
+}
+
+.add-seats-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s;
+}
+
+.dropdown-content a:hover {
+  background: rgba(255, 75, 43, 0.1);
+}
+
+.dropdown-content a i {
+  width: 16px;
+  color: #ff4b2b;
+}
+
+/* Seats Actions */
+.seats-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.seats-actions .seat-type-select {
+  margin-right: 5px;
+}
+
+.seats-actions .seat-type-select option {
+  background: #2a2d3e;
+  color: white;
+}
+
+/* Seat Layout Editor */
+.seat-layout-editor {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.editor-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.editor-toolbar h4 {
+  margin: 0;
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.seat-type-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 15px;
+  border-radius: 8px;
+}
+
+.seat-type-selector label {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.seat-type-selector select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.seat-layout-preview {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.screen-indicator-small {
+  background: linear-gradient(90deg, #ff6b4a 0%, #ff4b2b 100%);
+  color: white;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#seat-layout-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.seat-layout-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.seat-layout-row-label {
+  font-weight: 600;
+  width: 40px;
+  text-align: center;
+  color: #ff4b2b;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.seat-layout-row-label:hover {
+  background: rgba(255, 75, 43, 0.2);
+  transform: scale(1.1);
+}
+
+.seat-layout-seats {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: center;
+}
+
+.seat-item {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  user-select: none;
+}
+
+.seat-item:hover {
+  transform: scale(1.15);
+}
+
+.seat-item.selected {
+  border-color: #ff4b2b;
+  box-shadow: 0 0 10px rgba(255, 75, 43, 0.5);
+}
+
+.seat-item.REGULAR {
+  background: rgba(74, 144, 226, 0.3);
+  color: #4a90e2;
+}
+
+.seat-item.VIP {
+  background: rgba(255, 215, 0, 0.3);
+  color: #ffd700;
+}
+
+.seat-item.COUPLE {
+  background: rgba(255, 105, 180, 0.3);
+  color: #ff69b4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .seat-modal-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

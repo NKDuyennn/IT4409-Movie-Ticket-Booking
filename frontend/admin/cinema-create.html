@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Create Cinema - MyShowz Admin</title>
+  <link rel="stylesheet" href="../assets/css/style-starter.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div class="admin-header">
+        <div class="header-breadcrumb">
+          <a href="cinemas.html"><i class="fas fa-arrow-left mr-1"></i> Back to Cinemas</a>
+        </div>
+        <h1>Create New <span style="color: #fbbf24;">Cinema</span></h1>
+        <p>Build your cinema network by adding locations, screens, and seating arrangements</p>
+      </div>
+
+      <!-- Cinema Creation Form -->
+      <div class="content-section">
+        <form id="cinema-form">
+          <!-- Step 1: Cinema Information -->
+          <div class="form-step active" id="step-1">
+            <div class="content-section-header">
+              <h2><i class="fas fa-building mr-2"></i>Step 1: Cinema Information</h2>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="cinema-name">Cinema Name <span class="required">*</span></label>
+                <input type="text" id="cinema-name" name="name" required placeholder="Enter cinema name">
+              </div>
+
+              <div class="form-group full-width">
+                <label for="cinema-address">Address <span class="required">*</span></label>
+                <textarea id="cinema-address" name="address" required rows="3" placeholder="Enter full address"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="cinema-city">City <span class="required">*</span></label>
+                <select id="cinema-city" name="city" required>
+                  <option value="">Select City</option>
+                  <option value="Hà Nội">Hà Nội</option>
+                  <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                  <option value="Đà Nẵng">Đà Nẵng</option>
+                  <option value="Hải Phòng">Hải Phòng</option>
+                  <option value="Cần Thơ">Cần Thơ</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="cinema-phone">Phone Number</label>
+                <input type="tel" id="cinema-phone" name="phone_number" placeholder="Enter phone number">
+              </div>
+
+              <div class="form-group">
+                <label for="cinema-latitude">Latitude</label>
+                <input type="number" step="0.00000001" id="cinema-latitude" name="latitude" placeholder="21.028511">
+              </div>
+
+              <div class="form-group">
+                <label for="cinema-longitude">Longitude</label>
+                <input type="number" step="0.00000001" id="cinema-longitude" name="longitude" placeholder="105.804817">
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" onclick="window.location.href='cinemas.html'">
+                <i class="fas fa-times mr-1"></i> Cancel
+              </button>
+              <button type="button" class="btn-primary" onclick="nextStep(2)">
+                Next: Add Screens <i class="fas fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Add Screens -->
+          <div class="form-step" id="step-2">
+            <div class="content-section-header">
+              <h2><i class="fas fa-film mr-2"></i>Step 2: Add Screens</h2>
+              <button type="button" class="btn-primary" onclick="addScreenRow()">
+                <i class="fas fa-plus"></i> Add New Screen
+              </button>
+            </div>
+
+            <div id="screens-container">
+              <!-- Screen rows will be added here -->
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" onclick="prevStep(1)">
+                <i class="fas fa-arrow-left mr-1"></i> Previous
+              </button>
+              <button type="button" class="btn-primary" onclick="nextStep(3)">
+                Next: Configure Seats <i class="fas fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Configure Seats -->
+          <div class="form-step" id="step-3">
+            <div class="content-section-header">
+              <h2><i class="fas fa-chair mr-2"></i>Step 3: Configure Seats for Each Screen</h2>
+            </div>
+
+            <div id="seats-container">
+              <!-- Screen cards will be added here -->
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" onclick="prevStep(2)">
+                <i class="fas fa-arrow-left mr-1"></i> Previous
+              </button>
+              <button type="submit" class="btn-success" id="submit-btn">
+                <i class="fas fa-check mr-1"></i> Create Cinema
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Screen Row Template (Hidden) -->
+  <template id="screen-row-template">
+    <div class="screen-row" data-screen-id>
+      <div class="screen-row-header">
+        <h4 data-screen-title></h4>
+        <button type="button" class="btn-danger btn-sm" data-action="remove">
+          <i class="fas fa-trash-alt"></i> Remove
+        </button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Screen Name <span class="required">*</span></label>
+          <input type="text" class="screen-name" required placeholder="e.g., Screen 1, Hall A">
+        </div>
+        <div class="form-group">
+          <label>Screen Type</label>
+          <select class="screen-type">
+            <option value="STANDARD">Standard</option>
+            <option value="IMAX">IMAX</option>
+            <option value="3D">3D</option>
+            <option value="4DX">4DX</option>
+            <option value="VIP">VIP</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Screen Card Template for Step 3 -->
+  <template id="screen-card-template">
+    <div class="screen-card" data-screen-card>
+      <div class="screen-card-header">
+        <h3 data-card-title></h3>
+        <span class="seat-count-badge" data-seat-count>0 seats</span>
+      </div>
+      <div class="screen-card-body">
+        <p class="no-seats-message" data-no-seats>No seats configured yet</p>
+        <div class="seat-preview" data-seat-preview style="display: none;">
+          <!-- Seat preview will be shown here -->
+        </div>
+      </div>
+      <div class="screen-card-footer">
+        <button type="button" class="btn-primary" data-action="configure-seats">
+          <i class="fas fa-chair"></i> Configure Seats
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <!-- Seat Configuration Modal -->
+  <div id="seat-modal" class="seat-modal">
+    <div class="seat-modal-content">
+      <div class="seat-modal-header">
+        <h2 id="modal-screen-title">Screen 1 - Seats</h2>
+        <button type="button" class="close-modal" onclick="closeSeatModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="seat-modal-body">
+        <div class="seat-modal-toolbar">
+          <div class="add-seats-dropdown">
+            <button type="button" class="btn-primary">
+              <i class="fas fa-plus"></i> Add Seats <i class="fas fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="#" onclick="addSeatRow(); return false;">
+                <i class="fas fa-list mr-2"></i> Add Row of Seats
+              </a>
+              <a href="#" onclick="addIndividualSeat(); return false;">
+                <i class="fas fa-plus-square mr-2"></i> Add Individual Seat
+              </a>
+            </div>
+          </div>
+          <button type="button" class="btn-danger" onclick="deleteSelectedSeats()">
+            <i class="fas fa-trash-alt"></i> Delete Selected
+          </button>
+          <div class="seat-type-changer">
+            <select id="bulk-seat-type">
+              <option value="">Change Type</option>
+              <option value="REGULAR">Regular</option>
+              <option value="VIP">VIP</option>
+              <option value="COUPLE">Couple</option>
+            </select>
+            <button type="button" class="btn-secondary btn-sm" onclick="applyBulkTypeChange()">
+              <i class="fas fa-check"></i> Apply
+            </button>
+          </div>
+        </div>
+
+        <div class="seat-layout-container">
+          <div class="screen-label">SCREEN</div>
+          <div id="seat-grid" class="seat-grid">
+            <!-- Seats will be rendered here -->
+          </div>
+        </div>
+
+        <div class="seat-legend">
+          <div class="legend-item">
+            <span class="seat-box seat-regular"></span>
+            <span>Regular</span>
+          </div>
+          <div class="legend-item">
+            <span class="seat-box seat-vip"></span>
+            <span>VIP</span>
+          </div>
+          <div class="legend-item">
+            <span class="seat-box seat-couple"></span>
+            <span>Couple</span>
+          </div>
+          <div class="legend-item">
+            <span class="seat-box seat-unavailable"></span>
+            <span>Unavailable</span>
+          </div>
+          <div class="legend-item">
+            <span class="seat-box seat-selected"></span>
+            <span>Selected</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="seat-modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeSeatModal()">Cancel</button>
+        <button type="button" class="btn-success" onclick="saveSeatConfiguration()">
+          <i class="fas fa-save"></i> Save Configuration
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Seat Row Modal -->
+  <div id="add-row-modal" class="seat-modal">
+    <div class="seat-modal-content" style="max-width: 500px;">
+      <div class="seat-modal-header">
+        <h2>Add Seat Row</h2>
+        <button type="button" class="close-modal" onclick="closeAddRowModal()">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="seat-modal-body">
+        <div class="form-group">
+          <label>Row Letter <span class="required">*</span></label>
+          <input type="text" id="new-row-letter" maxlength="2" placeholder="A" required>
+        </div>
+        <div class="form-group">
+          <label>Number of Seats <span class="required">*</span></label>
+          <input type="number" id="new-seat-count" min="1" max="50" value="10" required>
+        </div>
+        <div class="form-group">
+          <label>Seat Type</label>
+          <select id="new-seat-type">
+            <option value="REGULAR">Regular</option>
+            <option value="VIP">VIP</option>
+            <option value="COUPLE">Couple</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="seat-modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeAddRowModal()">Cancel</button>
+        <button type="button" class="btn-primary" onclick="confirmAddRow()">
+          <i class="fa fa-plus"></i> Add Row
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Individual Seat Modal -->
+  <div id="add-individual-modal" class="seat-modal">
+    <div class="seat-modal-content" style="max-width: 500px;">
+      <div class="seat-modal-header">
+        <h2>Add Individual Seat</h2>
+        <button type="button" class="close-modal" onclick="closeAddIndividualModal()">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="seat-modal-body">
+        <div class="form-group">
+          <label>Row Letter <span class="required">*</span></label>
+          <select id="individual-row-letter" required>
+            <option value="">Select Row</option>
+            <!-- Will be populated dynamically -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Seat Number <span class="required">*</span></label>
+          <input type="number" id="individual-seat-number" min="1" max="50" placeholder="1" required>
+        </div>
+        <div class="form-group">
+          <label>Seat Type</label>
+          <select id="individual-seat-type">
+            <option value="REGULAR">Regular</option>
+            <option value="VIP">VIP</option>
+            <option value="COUPLE">Couple</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="seat-modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeAddIndividualModal()">Cancel</button>
+        <button type="button" class="btn-primary" onclick="confirmAddIndividualSeat()">
+          <i class="fa fa-plus"></i> Add Seat
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/jquery-1.9.1.min.js"></script>
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/auth-handler.js"></script>
+  <script src="assets/js/admin-common.js"></script>
+  <script src="assets/js/cinema-create.js"></script>
+</body>
+</html>

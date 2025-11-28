@@ -61,3 +61,73 @@
     }
 
 })();
+
+/**
+ * Global Helper Functions for Admin Pages
+ * These are convenient wrappers around AuthHandler functions
+ */
+
+// Check if user is authenticated
+function isAuthenticated() {
+    return window.AuthHandler && AuthHandler.isLoggedIn();
+}
+
+// Check if user is admin
+function isAdmin() {
+    return window.AuthHandler && AuthHandler.isAdmin();
+}
+
+// Get current user
+function getCurrentUser() {
+    return window.AuthHandler ? AuthHandler.getUser() : null;
+}
+
+// Redirect to login page
+function redirectToLogin() {
+    window.location.href = '../sign_in.html';
+}
+
+// Get auth headers for API requests
+function getAuthHeaders() {
+    const token = localStorage.getItem('access_token');
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    };
+}
+
+// Handle API response
+function handleResponse(response) {
+    if (response.status === 401) {
+        // Token expired or invalid
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('user');
+        redirectToLogin();
+        throw new Error('Unauthorized');
+    }
+    return response.json();
+}
+
+// Show alert message
+function showAlert(message, type = 'info') {
+    if (typeof asAlertMsg !== 'undefined') {
+        const typeMap = {
+            'success': 'Success',
+            'error': 'Error',
+            'warning': 'Warning',
+            'info': 'Info'
+        };
+        
+        asAlertMsg({
+            type: typeMap[type] || 'Info',
+            title: typeMap[type] || 'Info',
+            message: message,
+            button: {
+                title: "OK",
+                bg: typeMap[type] ? `${typeMap[type]} Button` : 'Info Button'
+            }
+        });
+    } else {
+        alert(message);
+    }
+}

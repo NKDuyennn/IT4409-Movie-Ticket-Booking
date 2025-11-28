@@ -1,0 +1,36 @@
+/* Base Styles */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* Global Layout */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-sidebar { 
+    width: 70px; 
+  }
+  .admin-main { 
+    margin-left: 70px; 
+    padding: 20px; 
+  }
+  .sidebar-menu span { 
+    display: none; 
+  }
+  .sidebar-user-info { 
+    display: none; 
+  }
+}

@@ -24,14 +24,21 @@ def admin_required():
     def wrapper(fn):
         @wraps(fn)
         def decorator(*args, **kwargs):
-            # Verify JWT token
-            verify_jwt_in_request()
-            
-            # Lấy user_id từ JWT
-            current_user_id = get_jwt_identity()
-            
-            # Tìm user trong database
-            user = User.query.get(current_user_id)
+            try:
+                # Verify JWT token
+                verify_jwt_in_request()
+                
+                # Lấy user_id từ JWT (convert string về int)
+                current_user_id = int(get_jwt_identity())
+                
+                # Tìm user trong database
+                user = User.query.get(current_user_id)
+            except Exception as e:
+                print(f"[DEBUG] Exception in admin_required: {e}")
+                return jsonify({
+                    'success': False,
+                    'message': 'Token không hợp lệ'
+                }), 401
             
             if not user:
                 return jsonify({
@@ -62,7 +69,7 @@ def get_current_user():
     """
     try:
         verify_jwt_in_request()
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         return User.query.get(current_user_id)
     except Exception:
         return None
