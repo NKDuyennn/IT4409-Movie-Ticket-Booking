@@ -88,12 +88,18 @@ function redirectToLogin() {
 }
 
 // Get auth headers for API requests
-function getAuthHeaders() {
+function getAuthHeaders(skipContentType = false) {
     const token = localStorage.getItem('access_token');
-    return {
-        'Content-Type': 'application/json',
+    const headers = {
         'Authorization': `Bearer ${token}`
     };
+    
+    // Don't set Content-Type for FormData (browser will set it with boundary)
+    if (!skipContentType) {
+        headers['Content-Type'] = 'application/json';
+    }
+    
+    return headers;
 }
 
 // Handle API response

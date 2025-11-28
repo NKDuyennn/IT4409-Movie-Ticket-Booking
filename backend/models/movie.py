@@ -23,7 +23,7 @@ class Movie(db.Model):
     duration_minutes = db.Column(db.Integer, nullable=False)
     release_date = db.Column(db.Date, nullable=True, index=True)
     director = db.Column(db.String(255), nullable=True)
-    genre = db.Column(db.String(100), nullable=True)
+    genre = db.Column(db.String(255), nullable=True)
     language = db.Column(db.String(50), nullable=True)
     rating = db.Column(db.Numeric(3, 1), default=0.0, nullable=True)
     age_rating = db.Column(db.String(10), default='P', nullable=True, index=True)
