@@ -116,9 +116,9 @@ class AuthService:
             if not user.check_password(password):
                 return False, "Email hoặc mật khẩu không đúng", None, None
             
-            # Tạo tokens
-            access_token = create_access_token(identity=user.user_id)
-            refresh_token = create_refresh_token(identity=user.user_id)
+            # Tạo tokens (identity phải là string)
+            access_token = create_access_token(identity=str(user.user_id))
+            refresh_token = create_refresh_token(identity=str(user.user_id))
             
             tokens = {
                 'access_token': access_token,

@@ -1,0 +1,30 @@
+/* Table Components - Generic styles for other tables */
+/* Note: Cinema-specific table styles are in pages/cinemas.css */
+
+/* Generic table styles for non-cinema pages */
+.generic-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.generic-table thead {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.generic-table th,
+.generic-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.generic-table th {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.generic-table td.actions {
+  display: flex;
+  gap: 8px;
+}

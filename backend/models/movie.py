@@ -104,7 +104,7 @@ class Screen(db.Model):
     """Model cho bảng screens"""
     __tablename__ = 'screens'
     
-    # Columns - khớp 100% với database schema
+    # Columns 
     screen_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     cinema_id = db.Column(db.Integer, db.ForeignKey('cinemas.cinema_id', ondelete='CASCADE'), nullable=False, index=True)
     screen_name = db.Column(db.String(100), nullable=False)

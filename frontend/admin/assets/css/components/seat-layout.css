@@ -1,0 +1,236 @@
+/* Seat Layout and Display Components */
+
+/* Seats Grid */
+.seats-grid {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.screen-indicator {
+  background: linear-gradient(90deg, #ff6b4a 0%, #ff4b2b 100%);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.seat-row-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 15px;
+}
+
+.row-label {
+  font-weight: 600;
+  width: 30px;
+  text-align: left;
+  color: #ff4b2b;
+  flex-shrink: 0;
+}
+
+.seat-row-seats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1;
+}
+
+/* Seat Layout Container */
+.seat-layout-container {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+}
+
+.screen-label {
+  background: linear-gradient(135deg, #ff4b2b 0%, #ff6b4a 100%);
+  text-align: center;
+  padding: 15px 100px;
+  border-radius: 8px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+  min-width: 500px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.seat-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 25px;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.seat-row-label {
+  width: 30px;
+  text-align: center;
+  font-weight: 700;
+  color: #ff4b2b;
+  font-size: 1rem;
+}
+
+.seat-row-seats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+/* Seat Styles */
+.seat {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px 8px 4px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.seat:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.seat-regular, .seat.regular {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  color: white;
+  width: 35px;
+}
+
+.seat-vip, .seat.vip {
+  background: linear-gradient(135deg, #f5a623 0%, #e8940e 100%);
+  color: white;
+  width: 35px;
+}
+
+.seat-couple, .seat.couple {
+  background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+  color: white;
+  border-radius: 20px;
+  width: 78px;
+}
+
+.seat-unavailable, .seat.unavailable {
+  background: linear-gradient(135deg, #424242 0%, #2e2e2e 100%);
+  cursor: not-allowed;
+  color: #888;
+}
+
+.seat-selected, .seat.selected {
+  border: 3px solid #fff !important;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+  transform: scale(1.05);
+}
+
+.seat:not(.unavailable):hover {
+  transform: scale(1.1);
+}
+
+/* Seat Boxes for Legend */
+.seat-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.seat-box.seat-regular {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+}
+
+.seat-box.seat-vip {
+  background: linear-gradient(135deg, #f5a623 0%, #e8940e 100%);
+}
+
+.seat-box.seat-couple {
+  background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+  border-radius: 10px;
+  width: 35px;
+}
+
+.seat-box.seat-unavailable {
+  background: linear-gradient(135deg, #424242 0%, #2e2e2e 100%);
+}
+
+.seat-box.seat-selected {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  border: 2px solid #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Seat Legend */
+.seat-legend {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-item .seat {
+  width: 25px;
+  height: 25px;
+  cursor: default;
+}
+
+.legend-item span {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.legend-item span:last-child {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .seat {
+    width: 30px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+  
+  .seat-couple, .seat.couple {
+    width: 68px;
+  }
+}

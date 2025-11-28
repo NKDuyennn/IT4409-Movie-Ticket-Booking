@@ -1,0 +1,92 @@
+/* Button Components */
+/* Note: .btn-primary and .btn-icon styles for cinema pages are in pages/cinemas.css */
+
+.btn-primary-general {
+  background: linear-gradient(90deg, #ff6b4a 0%, #ff4b2b 100%);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary-general:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 75, 43, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-success {
+  background: linear-gradient(90deg, #27ae60 0%, #229954 100%);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-danger {
+  background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-info {
+  background: rgba(74, 144, 226, 0.2);
+  color: #4a90e2;
+  border: 1px solid #4a90e2;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+.btn-icon-general {
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-icon-general.btn-view {
+  color: #4a90e2;
+  background: rgba(74, 144, 226, 0.1);
+}
+
+.btn-icon-general.btn-edit {
+  color: #f5a623;
+  background: rgba(245, 166, 35, 0.1);
+}
+
+.btn-icon-general.btn-delete {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.btn-icon-general:hover {
+  transform: translateY(-2px);
+}

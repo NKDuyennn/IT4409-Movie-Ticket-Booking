@@ -6,6 +6,7 @@
   <title>Manage Cinemas - MyShowz Admin</title>
   <link rel="stylesheet" href="../assets/css/style-starter.css">
   <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,23 +17,106 @@
     <!-- Main Content -->
     <main class="admin-main">
       <div class="admin-header">
-        <h1>Manage <span style="color: #ff4b2b;">Cinemas</span></h1>
-        <p>Manage cinemas, screens, and seat layouts</p>
+        <h1>Cinema <span style="color: #fbbf24;">Management</span></h1>
+        <p>Manage your cinema locations, screens, and seating arrangements</p>
       </div>
 
       <!-- Content Section -->
       <div class="content-section">
         <div class="content-section-header">
-          <h2>Cinemas & Screens</h2>
-          <button class="btn-primary"><i class="fa fa-plus"></i> Add Cinema</button>
-        </div>
-        <div id="cinemas-content">
-          <div class="empty-state">
-            <i class="fa fa-building"></i>
-            <h3>Cinema Management</h3>
-            <p>Manage cinemas, screens, seats, and showtimes</p>
+          <h2><i class="fas fa-building mr-2"></i>Cinema Locations</h2>
+          <div class="header-actions">
+            <div class="search-box">
+              <input type="text" id="search-input" placeholder="Search by name, city, or address..." />
+              <i class="fas fa-search"></i>
+            </div>
+            <select id="city-filter">
+              <option value="">All Cities</option>
+            </select>
+            <button class="btn-primary" onclick="window.location.href='cinema-create.html'">
+              <i class="fas fa-plus"></i> Add New Cinema
+            </button>
           </div>
         </div>
+
+        <!-- Cinemas Table -->
+        <div id="cinemas-content">
+          <div class="loading-state" id="loading-state">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading cinema data...</p>
+          </div>
+
+          <div class="cinemas-table-container" id="cinemas-table" style="display: none;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th><i class="fas fa-building mr-1"></i>Cinema Name</th>
+                  <th><i class="fas fa-map-marker-alt mr-1"></i>City</th>
+                  <th><i class="fas fa-map mr-1"></i>Address</th>
+                  <th><i class="fas fa-phone mr-1"></i>Phone</th>
+                  <th><i class="fas fa-film mr-1"></i>Screens</th>
+                  <th><i class="fas fa-cog mr-1"></i>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="cinemas-tbody">
+                <!-- Data will be loaded here -->
+              </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="pagination-container" id="pagination-container">
+              <!-- Pagination will be loaded here -->
+            </div>
+          </div>
+
+          <div class="empty-state" id="empty-state" style="display: none;">
+            <i class="fas fa-building-circle-exclamation"></i>
+            <h3>No Cinema Locations Found</h3>
+            <p>Start building your cinema network by adding your first location</p>
+            <button class="btn-primary" onclick="window.location.href='cinema-create.html'">
+              <i class="fas fa-plus"></i> Add First Cinema
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Cinema Row Template (Hidden) -->
+  <template id="cinema-row-template">
+    <tr>
+      <td><strong data-field="name"></strong></td>
+      <td data-field="city"></td>
+      <td data-field="address"></td>
+      <td data-field="phone"></td>
+      <td><span class="badge badge-info" data-field="screen_count"></span></td>
+      <td class="actions">
+        <button class="btn-icon btn-view" data-action="view" title="View Details">
+          <i class="fas fa-eye"></i>
+        </button>
+        <button class="btn-icon btn-edit" data-action="edit" title="Edit Cinema">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn-icon btn-delete" data-action="delete" title="Delete Cinema">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </td>
+    </tr>
+  </template>
+
+  <!-- Pagination Template (Hidden) -->
+  <template id="pagination-template">
+    <div class="pagination" data-pagination-buttons></div>
+    <div class="pagination-info" data-pagination-info></div>
+  </template>
+
+  <template id="page-button-template">
+    <button class="page-btn" data-page-number></button>
+  </template>
+
+  <template id="page-dots-template">
+    <span class="page-dots">...</span>
+  </template>
       </div>
     </main>
   </div>
