@@ -1,9 +1,8 @@
 """
 Movie, Cinema, Screen, Review Models
 Schema: 
-- movies (movie_id, title, description, duration_minutes, release_date, director, cast, 
-         genre, language, poster_url, trailer_url, rating, age_rating, is_showing, 
-         created_at, updated_at)
+- movies (movie_id, title, description, duration_minutes, release_date, director,
+         genre, language, rating, age_rating, is_showing, created_at, updated_at)
 - cinemas (cinema_id, name, address, city, phone_number, latitude, longitude, 
           created_at, updated_at)
 - screens (screen_id, cinema_id, screen_name, total_seats, screen_type)
@@ -24,11 +23,8 @@ class Movie(db.Model):
     duration_minutes = db.Column(db.Integer, nullable=False)
     release_date = db.Column(db.Date, nullable=True, index=True)
     director = db.Column(db.String(255), nullable=True)
-    cast = db.Column(db.Text, nullable=True)
     genre = db.Column(db.String(100), nullable=True)
     language = db.Column(db.String(50), nullable=True)
-    poster_url = db.Column(db.String(500), nullable=True)
-    trailer_url = db.Column(db.String(500), nullable=True)
     rating = db.Column(db.Numeric(3, 1), default=0.0, nullable=True)
     age_rating = db.Column(db.String(10), default='P', nullable=True, index=True)
     is_showing = db.Column(db.Boolean, default=True, nullable=True, index=True)
@@ -38,6 +34,9 @@ class Movie(db.Model):
     # Relationships
     showtimes = db.relationship('Showtime', back_populates='movie', lazy='dynamic', cascade='all, delete-orphan')
     reviews = db.relationship('Review', back_populates='movie', lazy='dynamic', cascade='all, delete-orphan')
+    movie_actors = db.relationship('MovieActor', back_populates='movie', lazy='dynamic', cascade='all, delete-orphan')
+    images = db.relationship('MovieImage', back_populates='movie', lazy='dynamic', cascade='all, delete-orphan')
+    videos = db.relationship('MovieVideo', back_populates='movie', lazy='dynamic', cascade='all, delete-orphan')
     
     def __repr__(self):
         return f'<Movie {self.title}>'
@@ -51,11 +50,8 @@ class Movie(db.Model):
             'duration_minutes': self.duration_minutes,
             'release_date': self.release_date.isoformat() if self.release_date else None,
             'director': self.director,
-            'cast': self.cast,
             'genre': self.genre,
             'language': self.language,
-            'poster_url': self.poster_url,
-            'trailer_url': self.trailer_url,
             'rating': float(self.rating) if self.rating else 0.0,
             'age_rating': self.age_rating,
             'is_showing': self.is_showing,

@@ -31,11 +31,8 @@ CREATE TABLE movies (
     duration_minutes INT NOT NULL,
     release_date DATE,
     director VARCHAR(255),
-    cast TEXT,
     genre VARCHAR(100),
     language VARCHAR(50),
-    poster_url VARCHAR(500),
-    trailer_url VARCHAR(500),
     rating DECIMAL(3,1) DEFAULT 0.0,
     age_rating VARCHAR(10) DEFAULT 'P',
     is_showing BOOLEAN DEFAULT TRUE,
@@ -44,6 +41,63 @@ CREATE TABLE movies (
     INDEX idx_is_showing (is_showing),
     INDEX idx_release_date (release_date),
     INDEX idx_age_rating (age_rating)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng ACTORS (thông tin diễn viên)
+CREATE TABLE actors (
+    actor_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    bio TEXT,
+    photo_url VARCHAR(500),
+    date_of_birth DATE,
+    nationality VARCHAR(100),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng MOVIE_ACTORS (quan hệ nhiều-nhiều giữa phim và diễn viên)
+CREATE TABLE movie_actors (
+    movie_actor_id INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id INT NOT NULL,
+    actor_id INT NOT NULL,
+    role_name VARCHAR(255),
+    character_name VARCHAR(255),
+    display_order INT DEFAULT 0,
+    FOREIGN KEY (movie_id) REFERENCES movies(movie_id) ON DELETE CASCADE,
+    FOREIGN KEY (actor_id) REFERENCES actors(actor_id) ON DELETE CASCADE,
+    UNIQUE KEY unique_movie_actor (movie_id, actor_id),
+    INDEX idx_movie_id (movie_id),
+    INDEX idx_actor_id (actor_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng MOVIE_IMAGES (ảnh của phim)
+CREATE TABLE movie_images (
+    image_id INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id INT NOT NULL,
+    image_url VARCHAR(500) NOT NULL,
+    image_type VARCHAR(50) DEFAULT 'POSTER',
+    caption VARCHAR(255),
+    display_order INT DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (movie_id) REFERENCES movies(movie_id) ON DELETE CASCADE,
+    INDEX idx_movie_id (movie_id),
+    INDEX idx_image_type (image_type)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng MOVIE_VIDEOS (video/trailer của phim)
+CREATE TABLE movie_videos (
+    video_id INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id INT NOT NULL,
+    video_url VARCHAR(500) NOT NULL,
+    video_type VARCHAR(50) DEFAULT 'TRAILER',
+    title VARCHAR(255),
+    duration_seconds INT,
+    display_order INT DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (movie_id) REFERENCES movies(movie_id) ON DELETE CASCADE,
+    INDEX idx_movie_id (movie_id),
+    INDEX idx_video_type (video_type)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Bảng CINEMAS (với updated_at)
