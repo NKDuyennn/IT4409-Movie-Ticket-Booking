@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Edit Movie - MyShowz Admin</title>
+  <link rel="stylesheet" href="../assets/css/style-starter.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/pages/movies.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div class="admin-header">
+        <div class="header-breadcrumb">
+          <a href="movies.html"><i class="fas fa-arrow-left mr-1"></i> Back to Movies</a>
+        </div>
+        <h1>Edit <span style="color: #fbbf24;">Movie</span></h1>
+        <p>Update movie information, cast, images, and videos</p>
+      </div>
+
+      <!-- Loading State -->
+      <div class="loading-state" id="page-loading-state">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading movie data...</p>
+      </div>
+
+      <!-- Movie Edit Form -->
+      <div class="content-section" id="edit-form-container" style="display: none;">
+        <form id="movie-form">
+          <input type="hidden" id="movie-id">
+
+          <!-- Tab Navigation -->
+          <div class="tab-navigation">
+            <button type="button" class="tab-btn active" data-tab="basic-info">
+              <i class="fas fa-info-circle"></i> Basic Information
+            </button>
+            <button type="button" class="tab-btn" data-tab="actors">
+              <i class="fas fa-users"></i> Cast & Actors
+            </button>
+            <button type="button" class="tab-btn" data-tab="videos">
+              <i class="fas fa-video"></i> Videos
+            </button>
+            <button type="button" class="tab-btn" data-tab="images">
+              <i class="fas fa-images"></i> Images
+            </button>
+          </div>
+
+          <!-- Tab 1: Basic Information -->
+          <div class="tab-content active" id="tab-basic-info">
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="movie-title">Movie Title <span class="required">*</span></label>
+                <input type="text" id="movie-title" name="title" required placeholder="Enter movie title">
+              </div>
+
+              <div class="form-group full-width">
+                <label for="movie-description">Description</label>
+                <textarea id="movie-description" name="description" rows="4" placeholder="Enter movie description"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="movie-director">Director</label>
+                <input type="text" id="movie-director" name="director" placeholder="Enter director name">
+              </div>
+
+              <div class="form-group">
+                <label for="movie-genre">Genre</label>
+                <input type="text" id="movie-genre" name="genre" placeholder="e.g., Action, Drama, Comedy">
+              </div>
+
+              <div class="form-group">
+                <label for="movie-duration">Duration (minutes) <span class="required">*</span></label>
+                <input type="number" id="movie-duration" name="duration_minutes" required placeholder="e.g., 120" min="1">
+              </div>
+
+              <div class="form-group">
+                <label for="movie-language">Language</label>
+                <input type="text" id="movie-language" name="language" placeholder="e.g., English, Vietnamese">
+              </div>
+
+              <div class="form-group">
+                <label for="movie-release-date">Release Date</label>
+                <input type="date" id="movie-release-date" name="release_date">
+              </div>
+
+              <div class="form-group">
+                <label for="movie-age-rating">Age Rating</label>
+                <select id="movie-age-rating" name="age_rating">
+                  <option value="P">P - All Ages</option>
+                  <option value="T13">T13 - 13+</option>
+                  <option value="T16">T16 - 16+</option>
+                  <option value="T18">T18 - 18+</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="movie-rating">Rating (0.0 - 10.0)</label>
+                <input type="number" step="0.1" min="0" max="10" id="movie-rating" name="rating" placeholder="Calculated from reviews" readonly style="background: rgba(255, 255, 255, 0.03); cursor: not-allowed;">
+              </div>
+
+              <div class="form-group">
+                <label for="movie-is-showing">Status</label>
+                <select id="movie-is-showing" name="is_showing">
+                  <option value="true">Active (Currently Showing)</option>
+                  <option value="false">Inactive (Not Showing)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Cast & Actors -->
+          <div class="tab-content" id="tab-actors">
+            <div class="content-section-header">
+              <button type="button" class="btn-primary" onclick="openActorSelector()">
+                <i class="fas fa-plus"></i> Add Actor
+              </button>
+            </div>
+
+            <div id="actors-list" class="actors-list">
+              <div class="empty-state-small" id="actors-empty-state">
+                <i class="fas fa-users"></i>
+                <p>No actors added yet. Click "Add Actor" to select from the database.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Videos -->
+          <div class="tab-content" id="tab-videos">
+            <div class="content-section-header">
+              <button type="button" class="btn-primary" onclick="addVideoRow()">
+                <i class="fas fa-plus"></i> Add Video
+              </button>
+            </div>
+
+            <div id="videos-list" class="videos-list">
+              <div class="empty-state-small" id="videos-empty-state">
+                <i class="fas fa-video"></i>
+                <p>No videos added yet. Click "Add Video" to add trailers or clips.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 4: Images -->
+          <div class="tab-content" id="tab-images">
+            <div class="content-section-header">
+              <button type="button" class="btn-primary" onclick="addImageRow()">
+                <i class="fas fa-plus"></i> Add Image
+              </button>
+            </div>
+
+            <div id="images-list" class="images-list">
+              <div class="empty-state-small" id="images-empty-state">
+                <i class="fas fa-images"></i>
+                <p>No images added yet. Click "Add Image" to add posters or stills.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="window.location.href='movies.html'">
+              <i class="fas fa-times mr-1"></i> Cancel
+            </button>
+            <button type="submit" class="btn-primary" id="submit-btn">
+              <i class="fas fa-save mr-1"></i> Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Actor Selector Modal -->
+  <div id="actor-selector-modal" class="modal">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h3><i class="fas fa-users mr-2"></i>Select Actor</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="search-box mb-3">
+          <input type="text" id="actor-search" placeholder="Search actors by name..." />
+          <i class="fas fa-search"></i>
+        </div>
+        
+        <div id="actors-selector-list" class="actors-selector-list">
+          <div class="loading-state">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading actors...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actor Details Modal -->
+  <div id="actor-details-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-user mr-2"></i>Actor Details</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="selected-actor-id">
+        <div class="form-group">
+          <label for="actor-role-name">Role Type</label>
+          <input type="text" id="actor-role-name" placeholder="e.g., Lead, Supporting">
+        </div>
+        <div class="form-group">
+          <label for="actor-character-name">Character Name</label>
+          <input type="text" id="actor-character-name" placeholder="e.g., John Wick">
+        </div>
+        <div class="form-group">
+          <label for="actor-display-order">Display Order</label>
+          <input type="number" id="actor-display-order" value="0" min="0">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeActorDetailsModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveActorDetails()">Add Actor</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Video Modal -->
+  <div id="add-video-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-video mr-2"></i>Add Video</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Video Source <span class="required">*</span></label>
+          <div class="source-toggle-group">
+            <button type="button" class="source-toggle-btn active" data-source="url" data-target="video">
+              <i class="fas fa-link"></i> URL Link
+            </button>
+            <button type="button" class="source-toggle-btn" data-source="file" data-target="video">
+              <i class="fas fa-upload"></i> Upload File
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group" id="video-url-group">
+          <label for="video-url">Video URL <span class="required">*</span></label>
+          <input type="text" id="video-url" placeholder="YouTube URL or video file URL">
+          <small style="color: rgba(255, 255, 255, 0.6); display: block; margin-top: 0.5rem;">
+            Example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+          </small>
+        </div>
+
+        <div class="form-group" id="video-file-group" style="display: none;">
+          <label for="video-file">Upload Video File <span class="required">*</span></label>
+          <input type="file" id="video-file" accept="video/*" style="width: 100%; padding: 0.75rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff;">
+          <small style="color: rgba(255, 255, 255, 0.6); display: block; margin-top: 0.5rem;">
+            Supported formats: MP4, WebM, AVI, MOV (Max 500MB)
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="video-type">Video Type <span class="required">*</span></label>
+          <select id="video-type" required>
+            <option value="TRAILER">Trailer</option>
+            <option value="CLIP">Clip</option>
+            <option value="FULL">Full Movie</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="video-title">Title</label>
+          <input type="text" id="video-title" placeholder="e.g., Official Trailer">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeVideoModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveVideo()">Add Video</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Image Modal -->
+  <div id="add-image-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-image mr-2"></i>Add Image</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Image Source <span class="required">*</span></label>
+          <div class="source-toggle-group">
+            <button type="button" class="source-toggle-btn active" data-source="url" data-target="image">
+              <i class="fas fa-link"></i> URL Link
+            </button>
+            <button type="button" class="source-toggle-btn" data-source="file" data-target="image">
+              <i class="fas fa-upload"></i> Upload File
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group" id="image-url-group">
+          <label for="image-url">Image URL <span class="required">*</span></label>
+          <input type="text" id="image-url" placeholder="Enter image URL">
+          <small style="color: rgba(255, 255, 255, 0.6); display: block; margin-top: 0.5rem;">
+            Example: https://example.com/image.jpg
+          </small>
+        </div>
+
+        <div class="form-group" id="image-file-group" style="display: none;">
+          <label for="image-file">Upload Image File <span class="required">*</span></label>
+          <input type="file" id="image-file" accept="image/*" style="width: 100%; padding: 0.75rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff;">
+          <small style="color: rgba(255, 255, 255, 0.6); display: block; margin-top: 0.5rem;">
+            Supported formats: JPG, PNG, WebP (Max 10MB)
+          </small>
+          <div id="image-preview" style="margin-top: 1rem; display: none;">
+            <img id="image-preview-img" style="max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="image-type">Image Type <span class="required">*</span></label>
+          <select id="image-type" required>
+            <option value="POSTER">Poster</option>
+            <option value="BACKDROP">Backdrop</option>
+            <option value="STILL">Still</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="image-caption">Caption</label>
+          <input type="text" id="image-caption" placeholder="Optional caption for the image">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeImageModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveImage()">Add Image</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HTML Templates -->
+  <!-- Actor Card Template -->
+  <template id="actor-card-template">
+    <div class="actor-card">
+      <button type="button" class="remove-btn" data-action="remove-actor">
+        <i class="fas fa-times"></i>
+      </button>
+      <img data-field="photo" alt="">
+      <h4 data-field="name"></h4>
+      <p data-field="character"></p>
+      <p data-field="role"></p>
+      <p data-field="order"></p>
+    </div>
+  </template>
+
+  <!-- Actor Photo Placeholder Template -->
+  <template id="actor-photo-placeholder-template">
+    <div style="width:100%;height:150px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:48px;">
+      <i class="fas fa-user"></i>
+    </div>
+  </template>
+
+  <!-- Actor Selector Card Template -->
+  <template id="actor-selector-card-template">
+    <div class="actor-selector-card" data-action="select-actor">
+      <img data-field="photo" alt="">
+      <h4 data-field="name"></h4>
+      <p data-field="nationality"></p>
+      <i class="fas fa-check-circle" data-field="selected-icon" style="display: none;"></i>
+    </div>
+  </template>
+
+  <!-- Video Card Template -->
+  <template id="video-card-template">
+    <div class="video-card">
+      <button type="button" class="remove-btn" data-action="remove-video">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="video-preview" data-field="embed"></div>
+      <div class="video-info">
+        <p><strong data-field="title"></strong></p>
+        <p data-field="type"></p>
+        <p class="text-truncate" data-field="url"></p>
+      </div>
+    </div>
+  </template>
+
+  <!-- Image Card Template -->
+  <template id="image-card-template">
+    <div class="image-card">
+      <button type="button" class="remove-btn" data-action="remove-image">
+        <i class="fas fa-times"></i>
+      </button>
+      <img data-field="image" alt="">
+      <div class="image-info">
+        <p><strong data-field="type"></strong></p>
+        <p data-field="caption"></p>
+      </div>
+    </div>
+  </template>
+
+  <!-- Empty State Template -->
+  <template id="empty-actors-template">
+    <div class="empty-state-small">
+      <i class="fas fa-users"></i>
+      <p>No actors added yet. Click "Add Actor" to select from the database.</p>
+    </div>
+  </template>
+
+  <template id="empty-videos-template">
+    <div class="empty-state-small">
+      <i class="fas fa-video"></i>
+      <p>No videos added yet. Click "Add Video" to add trailers or clips.</p>
+    </div>
+  </template>
+
+  <template id="empty-images-template">
+    <div class="empty-state-small">
+      <i class="fas fa-images"></i>
+      <p>No images added yet. Click "Add Image" to add posters or stills.</p>
+    </div>
+  </template>
+
+  <!-- No Actors Found Template -->
+  <template id="no-actors-found-template">
+    <p class="text-center">No actors found</p>
+  </template>
+
+  <!-- Character Info Template -->
+  <template id="character-info-template">
+    <strong>Character:</strong> <span data-field="character"></span>
+  </template>
+
+  <!-- Role Info Template -->
+  <template id="role-info-template">
+    <strong>Role:</strong> <span data-field="role"></span>
+  </template>
+
+  <!-- Order Info Template -->
+  <template id="order-info-template">
+    <strong>Order:</strong> <span data-field="order"></span>
+  </template>
+
+  <script src="../assets/js/jquery-1.9.1.min.js"></script>
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/auth-handler.js"></script>
+  <script src="assets/js/admin-common.js"></script>
+  <script src="assets/js/movie-edit.js"></script>
+</body>
+</html>
