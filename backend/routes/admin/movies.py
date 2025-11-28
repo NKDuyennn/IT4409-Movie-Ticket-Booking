@@ -1,6 +1,6 @@
 """
 Admin movies routes
-Handle CRUD operations for movies, showtimes, and promotions
+Handle CRUD operations for movies
 """
 from flask import Blueprint, jsonify, request
 
@@ -39,18 +39,4 @@ def update_movie(movie_id):
 def delete_movie(movie_id):
     """Delete a movie."""
     # TODO: Implement delete movie logic
-    return jsonify({'success': False, 'message': 'Not implemented'}), 501
-
-
-@movies_bp.route('/<int:movie_id>/showtimes', methods=['GET', 'POST'])
-def manage_showtimes(movie_id):
-    """List or create showtimes for a movie."""
-    # TODO: Implement showtimes management logic
-    return jsonify({'success': False, 'message': 'Not implemented'}), 501
-
-
-@movies_bp.route('/promotions', methods=['GET', 'POST'])
-def manage_promotions():
-    """List or create promotions."""
-    # TODO: Implement promotions management logic
     return jsonify({'success': False, 'message': 'Not implemented'}), 501
