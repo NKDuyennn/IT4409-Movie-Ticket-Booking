@@ -412,7 +412,26 @@ INSERT INTO movie_videos (movie_id, video_url, video_type, title, duration_secon
 (12, 'https://www.youtube.com/watch?v=Ga6RYejo6Hk', 'TRAILER', 'Official Trailer', 120, 1),
 (12, 'https://www.youtube.com/watch?v=xlnPHQ3TLX8', 'TRAILER', 'Teaser Trailer', 90, 2);
 
+-- Insert Promotions
+INSERT INTO promotions (code, name, description, discount_percentage, discount_amount, valid_from, valid_to, usage_limit, used_count, is_active) VALUES
+('SUMMER2024', 'Summer Sale 2024', 'Get 20% off on all movie tickets this summer!', 20.00, NULL, '2024-06-01', '2024-08-31', 1000, 245, TRUE),
+('WELCOME10', 'Welcome New User', 'Special 10% discount for new users on their first booking', 10.00, NULL, '2024-01-01', '2024-12-31', NULL, 523, TRUE),
+('WEEKEND50K', 'Weekend Special', 'Flat 50,000 VND off on weekend bookings', NULL, 50000.00, '2024-11-01', '2024-12-31', 500, 187, TRUE),
+('STUDENT15', 'Student Discount', 'Students get 15% off with valid student ID', 15.00, NULL, '2024-09-01', '2025-06-30', 2000, 892, TRUE),
+('NEWYEAR2024', 'New Year Special', 'Celebrate New Year with 25% discount on all shows', 25.00, NULL, '2024-12-25', '2025-01-05', 800, 654, FALSE),
+('FAMILY30', 'Family Package', 'Book 4 or more tickets and get 30% off', 30.00, NULL, '2024-01-01', '2024-12-31', 1500, 423, TRUE),
+('EARLYBIRD', 'Early Bird Discount', 'Book before 12 PM and save 100,000 VND', NULL, 100000.00, '2024-10-01', '2025-03-31', 300, 89, TRUE),
+('VIPGOLD', 'VIP Gold Member', 'Exclusive 35% discount for VIP Gold members', 35.00, NULL, '2024-01-01', '2024-12-31', NULL, 1245, TRUE),
+('BIRTHDAY20', 'Birthday Special', 'Get 20% off on your birthday month', 20.00, NULL, '2024-01-01', '2024-12-31', NULL, 678, TRUE),
+('MIDWEEK40K', 'Midweek Madness', 'Save 40,000 VND on Tuesday and Wednesday shows', NULL, 40000.00, '2024-11-01', '2025-02-28', 600, 234, TRUE),
+('COUPLE2FOR1', 'Couple Special', 'Buy one get one free for couple seats', 50.00, NULL, '2024-02-01', '2024-02-29', 400, 400, FALSE),
+('FLASH30', 'Flash Sale', 'Limited time 30% off - Hurry!', 30.00, NULL, '2024-11-15', '2024-11-20', 200, 156, FALSE),
+('LOYALTY25', 'Loyalty Reward', 'Thank you for being loyal - 25% discount', 25.00, NULL, '2024-01-01', '2024-12-31', NULL, 2134, TRUE),
+('MATINEE20K', 'Matinee Show', 'Save 20,000 VND on shows before 5 PM', NULL, 20000.00, '2024-01-01', '2024-12-31', NULL, 567, TRUE),
+('BLOCKBUSTER10', 'Blockbuster Deal', '10% off on all blockbuster movies', 10.00, NULL, '2024-11-01', '2024-12-31', 1000, 445, TRUE);
+
 SELECT 'Database created successfully!' as message;
 SELECT '✅ 2 sample users created:' as info;
 SELECT '   Admin: admin@gmail.com / 123456' as admin_account;
 SELECT '   User:  user@gmail.com / 123456' as user_account;
+SELECT '✅ 15 sample promotions created' as promotions_info;

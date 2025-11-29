@@ -16,7 +16,15 @@ def list_promotions():
     """List all promotions with optional filters."""
     try:
         # Get query parameters for filtering
-        is_active = request.args.get('is_active', type=bool)
+        is_active_str = request.args.get('is_active', type=str)
+        is_active = None
+        
+        # Convert string to boolean properly
+        if is_active_str is not None:
+            if is_active_str.lower() == 'true':
+                is_active = True
+            elif is_active_str.lower() == 'false':
+                is_active = False
         
         promotions = promotions_service.get_all_promotions(is_active=is_active)
         
@@ -39,7 +47,7 @@ def create_promotion():
         data = request.get_json()
         
         # Validate required fields
-        required_fields = ['name', 'discount_percentage', 'start_date', 'end_date']
+        required_fields = ['code', 'name', 'valid_from', 'valid_to']
         for field in required_fields:
             if field not in data:
                 return jsonify({

@@ -6,6 +6,8 @@
   <title>Manage Promotions - MyShowz Admin</title>
   <link rel="stylesheet" href="../assets/css/style-starter.css">
   <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/pages/promotions.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,167 +18,144 @@
     <!-- Main Content -->
     <main class="admin-main">
       <div class="admin-header">
-        <h1>Manage <span style="color: #ff4b2b;">Promotions</span></h1>
-        <p>Create and manage promotional offers and discounts</p>
+        <h1>Promotion <span style="color: #fbbf24;">Management</span></h1>
+        <p>Manage promotional codes and discount offers</p>
       </div>
 
-      <!-- Filters Section -->
+      <!-- Content Section -->
       <div class="content-section">
         <div class="content-section-header">
-          <h2>Filter Promotions</h2>
-        </div>
-        <div class="filter-container">
-          <div class="filter-group">
-            <label for="filter-status">Status:</label>
-            <select id="filter-status" class="form-control">
-              <option value="">All Statuses</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-              <option value="expired">Expired</option>
+          <h2><i class="fas fa-tags mr-2"></i>Promotions Catalog</h2>
+          <div class="header-actions">
+            <div class="search-box">
+              <input type="text" id="search-input" placeholder="Search by code or name..." />
+              <i class="fas fa-search"></i>
+            </div>
+            <select id="active-filter" class="filter-select">
+              <option value="">All Promotions</option>
+              <option value="true">Active</option>
+              <option value="false">Inactive</option>
             </select>
+            <button class="btn-primary" onclick="window.location.href='promotion-create.html'">
+              <i class="fas fa-plus"></i> Add New Promotion
+            </button>
           </div>
-          <button class="btn-primary" id="btn-filter">
-            <i class="fa fa-filter"></i> Apply Filters
-          </button>
-          <button class="btn-secondary" id="btn-clear-filter">
-            <i class="fa fa-times"></i> Clear
-          </button>
         </div>
-      </div>
 
-      <!-- Promotions List Section -->
-      <div class="content-section">
-        <div class="content-section-header">
-          <h2>Promotions List</h2>
-          <button class="btn-primary" id="btn-add-promotion">
-            <i class="fa fa-plus"></i> Add Promotion
-          </button>
-        </div>
+        <!-- Promotions Table -->
         <div id="promotions-content">
-          <div class="table-responsive">
-            <table class="admin-table">
+          <div class="loading-state" id="loading-state">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading promotions data...</p>
+          </div>
+
+          <div class="promotions-table-container" id="promotions-table" style="display: none;">
+            <table class="data-table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Code</th>
-                  <th>Discount</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th><i class="fas fa-barcode mr-1"></i>Code</th>
+                  <th><i class="fas fa-tag mr-1"></i>Name</th>
+                  <th><i class="fas fa-percent mr-1"></i>Discount</th>
+                  <th><i class="fas fa-calendar-alt mr-1"></i>Valid From</th>
+                  <th><i class="fas fa-calendar-check mr-1"></i>Valid To</th>
+                  <th><i class="fas fa-users mr-1"></i>Usage</th>
+                  <th><i class="fas fa-signal mr-1"></i>Status</th>
+                  <th><i class="fas fa-cog mr-1"></i>Actions</th>
                 </tr>
               </thead>
-              <tbody id="promotions-table-body">
-                <tr>
-                  <td colspan="8" class="text-center">Loading promotions...</td>
-                </tr>
+              <tbody id="promotions-tbody">
+                <!-- Data will be loaded here -->
               </tbody>
             </table>
+
+            <!-- Pagination -->
+            <div class="pagination-container" id="pagination-container">
+              <!-- Pagination will be loaded here -->
+            </div>
+          </div>
+
+          <div class="empty-state" id="empty-state" style="display: none;">
+            <i class="fas fa-tags"></i>
+            <h3>No Promotions Found</h3>
+            <p>Start creating promotional offers by adding your first promotion</p>
+            <button class="btn-primary" onclick="window.location.href='promotion-create.html'">
+              <i class="fas fa-plus"></i> Add First Promotion
+            </button>
           </div>
         </div>
       </div>
     </main>
   </div>
 
-  <!-- Add/Edit Promotion Modal -->
-  <div id="promotion-modal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="modal-title">Add Promotion</h2>
-        <span class="modal-close">&times;</span>
-      </div>
-      <div class="modal-body">
-        <form id="promotion-form">
-          <input type="hidden" id="promotion-id">
-          
-          <div class="form-group">
-            <label for="promotion-name">Promotion Name <span class="required">*</span></label>
-            <input type="text" id="promotion-name" class="form-control" required>
-          </div>
-
-          <div class="form-group">
-            <label for="promotion-code">Promotion Code <span class="required">*</span></label>
-            <input type="text" id="promotion-code" class="form-control" required>
-          </div>
-
-          <div class="form-group">
-            <label for="promotion-description">Description</label>
-            <textarea id="promotion-description" class="form-control" rows="3"></textarea>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="promotion-discount">Discount (%) <span class="required">*</span></label>
-              <input type="number" id="promotion-discount" class="form-control" min="0" max="100" required>
-            </div>
-
-            <div class="form-group">
-              <label for="promotion-max-discount">Max Discount Amount (VND)</label>
-              <input type="number" id="promotion-max-discount" class="form-control" min="0" step="1000">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="promotion-start-date">Start Date <span class="required">*</span></label>
-              <input type="date" id="promotion-start-date" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-              <label for="promotion-end-date">End Date <span class="required">*</span></label>
-              <input type="date" id="promotion-end-date" class="form-control" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="promotion-usage-limit">Usage Limit</label>
-            <input type="number" id="promotion-usage-limit" class="form-control" min="0">
-          </div>
-
-          <div class="form-group">
-            <label for="promotion-status">Status <span class="required">*</span></label>
-            <select id="promotion-status" class="form-control" required>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-          </div>
-
-          <div class="modal-actions">
-            <button type="button" class="btn-secondary modal-cancel">Cancel</button>
-            <button type="submit" class="btn-primary">
-              <i class="fa fa-save"></i> Save Promotion
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
   <!-- Delete Confirmation Modal -->
   <div id="delete-modal" class="modal">
-    <div class="modal-content modal-sm">
+    <div class="modal-content">
       <div class="modal-header">
-        <h2>Confirm Delete</h2>
-        <span class="modal-close">&times;</span>
+        <h3>Confirm Delete</h3>
+        <span class="close">&times;</span>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete this promotion?</p>
-        <p class="text-danger"><strong>This action cannot be undone.</strong></p>
-        <div class="modal-actions">
-          <button type="button" class="btn-secondary modal-cancel">Cancel</button>
-          <button type="button" class="btn-danger" id="confirm-delete">
-            <i class="fa fa-trash"></i> Delete
-          </button>
-        </div>
+        <p>Are you sure you want to delete the promotion "<strong id="delete-promotion-code"></strong>"?</p>
+        <p class="warning-text">This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+        <button class="btn-danger" id="confirm-delete-btn">Delete Promotion</button>
       </div>
     </div>
   </div>
+
+  <!-- HTML Templates -->
+  <!-- Promotion Row Template -->
+  <template id="promotion-row-template">
+    <tr>
+      <td><strong data-field="code"></strong></td>
+      <td data-field="name"></td>
+      <td>
+        <div class="discount-badge" data-field="discount"></div>
+      </td>
+      <td data-field="valid-from"></td>
+      <td data-field="valid-to"></td>
+      <td data-field="usage"></td>
+      <td>
+        <span class="status-badge" data-field="status"></span>
+      </td>
+      <td>
+        <div class="action-buttons">
+          <button class="btn-icon btn-view" data-action="view" title="View">
+            <i class="fas fa-eye"></i>
+          </button>
+          <button class="btn-icon btn-edit" data-action="edit" title="Edit">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn-icon btn-delete" data-action="delete" title="Delete">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </template>
+
+  <!-- Pagination Button Template -->
+  <template id="pagination-btn-template">
+    <button class="page-btn" data-action="change-page"></button>
+  </template>
+
+  <!-- Pagination Dots Template -->
+  <template id="pagination-dots-template">
+    <span class="page-dots">...</span>
+  </template>
+
+  <!-- Pagination Info Template -->
+  <template id="pagination-info-template">
+    <div class="pagination-info" data-field="info"></div>
+  </template>
 
   <script src="../assets/js/jquery-1.9.1.min.js"></script>
   <script src="../assets/js/config.js"></script>
   <script src="../assets/js/auth-handler.js"></script>
   <script src="assets/js/admin-common.js"></script>
-  <script src="assets/js/promotions.js"></script>
+  <script src="assets/js/promotion-list.js"></script>
 </body>
 </html>
+
