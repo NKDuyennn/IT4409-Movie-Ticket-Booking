@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Edit Showtime - MyShowz Admin</title>
+  <link rel="stylesheet" href="../assets/css/style-starter.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/pages/showtimes.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div class="admin-header">
+        <div class="header-breadcrumb">
+          <a href="showtimes.html"><i class="fas fa-arrow-left mr-1"></i> Back to Showtimes</a>
+        </div>
+        <h1>Edit <span style="color: #fbbf24;">Showtime</span></h1>
+        <p>Update showtime information</p>
+      </div>
+
+      <div class="loading-state" id="loading-state">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading showtime data...</p>
+      </div>
+
+      <!-- Edit Showtime Form -->
+      <div class="content-section" id="edit-form" style="display: none;">
+        <form id="showtime-form">
+          <input type="hidden" id="showtime-id">
+
+          <!-- Editable Fields -->
+          <div class="form-section">
+            <h3 class="section-title"><i class="fas fa-edit"></i> Edit Showtime Details</h3>
+            
+            <div class="form-row-compact">
+              <div class="form-group">
+                <label for="show-date"><i class="fas fa-calendar-alt"></i> Date <span class="required">*</span></label>
+                <input type="date" id="show-date" class="form-input" required disabled>
+              </div>
+              
+              <div class="form-group">
+                <label for="show-time"><i class="fas fa-clock"></i> Time <span class="required">*</span></label>
+                <select id="show-time" class="form-input" required disabled>
+                  <option value="">Select time</option>
+                  <option value="09:00">09:00</option>
+                  <option value="12:00">12:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="18:00">18:00</option>
+                  <option value="21:00">21:00</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="base-price"><i class="fas fa-money-bill-wave"></i> Price (VND) <span class="required">*</span></label>
+                <input type="number" id="base-price" class="form-input" min="0" step="1000" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="status"><i class="fas fa-signal"></i> Status</label>
+                <select id="status" class="form-input">
+                  <option value="SCHEDULED">Scheduled</option>
+                  <option value="COMPLETED">Completed</option>
+                  <option value="CANCELLED">Cancelled</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Current Info (Read-only) -->
+          <div class="form-section">
+            <h3 class="section-title"><i class="fas fa-info-circle"></i> Current Information</h3>
+            
+            <div class="info-grid">
+              <div class="info-item">
+                <label>Movie:</label>
+                <strong id="current-movie"></strong>
+              </div>
+              <div class="info-item">
+                <label>Cinema:</label>
+                <strong id="current-cinema"></strong>
+              </div>
+              <div class="info-item">
+                <label>Screen:</label>
+                <strong id="current-screen"></strong>
+              </div>
+              <div class="info-item">
+                <label>Available Seats:</label>
+                <strong id="current-seats"></strong>
+              </div>
+            </div>
+            <p class="help-text"><i class="fas fa-info-circle"></i> Movie, Cinema, and Screen cannot be changed. To change these, please delete and create a new showtime.</p>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="window.location.href='showtimes.html'">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+            <button type="submit" class="btn-primary">
+              <i class="fas fa-save"></i> Update Showtime
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/jquery-1.9.1.min.js"></script>
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/auth-handler.js"></script>
+  <script src="assets/js/admin-common.js"></script>
+  <script src="assets/js/showtime-edit.js"></script>
+</body>
+</html>
+

@@ -45,7 +45,7 @@ def create_showtime():
         data = request.get_json()
         
         # Validate required fields
-        required_fields = ['movie_id', 'cinema_id', 'hall_id', 'show_date', 'show_time', 'price']
+        required_fields = ['movie_id', 'screen_id', 'show_datetime', 'base_price']
         for field in required_fields:
             if field not in data:
                 return jsonify({
@@ -145,8 +145,43 @@ def delete_showtime(showtime_id):
             'success': True,
             'message': 'Showtime deleted successfully'
         }), 200
+    except ValueError as e:
+        return jsonify({
+            'success': False,
+            'message': str(e)
+        }), 400
     except Exception as e:
         return jsonify({
             'success': False,
             'message': f'Failed to delete showtime: {str(e)}'
+        }), 500
+
+
+@showtimes_bp.route('/available-screens', methods=['GET'])
+@admin_required()
+def get_available_screens():
+    """Get available screens for a specific datetime."""
+    try:
+        cinema_id = request.args.get('cinema_id', type=int)
+        show_datetime = request.args.get('show_datetime')
+        duration_minutes = request.args.get('duration_minutes', type=int)
+        
+        if not cinema_id or not show_datetime or not duration_minutes:
+            return jsonify({
+                'success': False,
+                'message': 'Missing required parameters: cinema_id, show_datetime, duration_minutes'
+            }), 400
+        
+        screens = showtimes_service.get_available_screens_for_datetime(
+            cinema_id, show_datetime, duration_minutes
+        )
+        
+        return jsonify({
+            'success': True,
+            'data': screens
+        }), 200
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Failed to fetch available screens: {str(e)}'
         }), 500

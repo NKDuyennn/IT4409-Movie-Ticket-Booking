@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Add Showtime - MyShowz Admin</title>
+  <link rel="stylesheet" href="../assets/css/style-starter.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/pages/showtimes.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div class="admin-header">
+        <div class="header-breadcrumb">
+          <a href="showtimes.html"><i class="fas fa-arrow-left mr-1"></i> Back to Showtimes</a>
+        </div>
+        <h1>Add <span style="color: #fbbf24;">Showtime</span></h1>
+        <p>Create new movie showtime by selecting movie, date, cinema, screen and time slots</p>
+      </div>
+
+      <!-- Create Showtime Form - Single Page -->
+      <div class="content-section">
+        <!-- Select Movie -->
+        <div class="form-section">
+          <h3 class="section-title"><i class="fas fa-film"></i> Select Movie <span class="required">*</span></h3>
+
+          <div class="loading-state" id="movies-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading movies...</p>
+          </div>
+
+          <div class="scroll-wrapper" id="movies-scroll" style="display: none;">
+            <div class="scroll-container" id="movies-container">
+              <!-- Movies will be loaded here -->
+            </div>
+          </div>
+
+          <div class="empty-state" id="movies-empty" style="display: none;">
+            <i class="fas fa-film-slash"></i>
+            <h3>No Movies Available</h3>
+          </div>
+        </div>
+
+        <!-- Select Date -->
+        <div class="form-section">
+          <h3 class="section-title"><i class="fas fa-calendar-alt"></i> Select Date <span class="required">*</span></h3>
+          <input type="date" id="show-date-picker" class="date-input" required>
+        </div>
+
+        <!-- Select Cinema -->
+        <div class="form-section">
+          <h3 class="section-title"><i class="fas fa-building"></i> Select Cinema <span class="required">*</span></h3>
+
+          <div class="loading-state" id="cinemas-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading cinemas...</p>
+          </div>
+
+          <div class="scroll-wrapper" id="cinemas-scroll" style="display: none;">
+            <div class="scroll-container" id="cinemas-grid">
+              <!-- Cinemas will be loaded here -->
+            </div>
+          </div>
+
+          <div class="empty-state" id="cinemas-empty" style="display: none;">
+            <i class="fas fa-building-slash"></i>
+            <h3>No Cinemas Available</h3>
+          </div>
+        </div>
+
+        <!-- Select Screen -->
+        <div class="form-section" id="screen-section" style="display: none;">
+          <h3 class="section-title"><i class="fas fa-tv"></i> Select Screen <span class="required">*</span></h3>
+
+          <div class="loading-state" id="screens-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading screens...</p>
+          </div>
+
+          <div class="scroll-wrapper" id="screens-scroll" style="display: none;">
+            <div class="scroll-container" id="screens-grid">
+              <!-- Screens will be loaded here -->
+            </div>
+          </div>
+
+          <div class="empty-state" id="screens-empty" style="display: none;">
+            <i class="fas fa-tv-slash"></i>
+            <h3>No Screens Available</h3>
+          </div>
+        </div>
+
+        <!-- Select Time Slots & Price -->
+        <div class="form-section" id="time-section" style="display: none;">
+          <h3 class="section-title"><i class="fas fa-clock"></i> Select Time & Price <span class="required">*</span></h3>
+
+          <div class="time-price-wrapper">
+            <div class="time-slots-box">
+              <label>Time Slots:</label>
+              <div class="time-slots-list" id="time-slots-grid">
+                <!-- Time slots will be generated here -->
+              </div>
+            </div>
+
+            <div class="price-box">
+              <label for="base-price">Price (VND):</label>
+              <input type="number" id="base-price" class="price-input" min="0" step="1000" value="80000" required>
+            </div>
+          </div>
+
+          <div id="selected-times-container" class="selected-times-box" style="display: none;">
+            <label>Selected:</label>
+            <div id="selected-times-list" class="selected-times-list">
+              <!-- Selected times will be displayed here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Actions -->
+        <div class="form-actions" id="submit-actions" style="display: none;">
+          <button type="button" class="btn-secondary" onclick="window.location.href='showtimes.html'">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <button type="button" class="btn-primary" id="btn-create-showtimes" disabled>
+            <i class="fas fa-plus"></i> Create Showtimes
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Movie Card Template -->
+  <template id="movie-card-template">
+    <div class="movie-card" data-movie-id>
+      <div class="movie-poster" data-field="poster"></div>
+      <div class="movie-info">
+        <h3 data-field="title"></h3>
+        <div class="movie-meta">
+          <span class="age-rating" data-field="age-rating"></span>
+          <span class="duration" data-field="duration"></span>
+          <span class="rating" data-field="rating"></span>
+        </div>
+        <p class="genre" data-field="genre"></p>
+      </div>
+    </div>
+  </template>
+
+  <!-- Cinema Card Template -->
+  <template id="cinema-card-template">
+    <div class="cinema-card" data-cinema-id>
+      <div class="cinema-icon">
+        <i class="fas fa-building"></i>
+      </div>
+      <div class="cinema-info">
+        <h3 data-field="name"></h3>
+        <p class="cinema-address" data-field="address"></p>
+        <p class="cinema-city" data-field="city"></p>
+        <div class="cinema-meta">
+          <span><i class="fas fa-tv"></i> <span data-field="screens"></span> screens</span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Screen Card Template -->
+  <template id="screen-card-template">
+    <div class="screen-card" data-screen-id>
+      <div class="screen-icon">
+        <i class="fas fa-tv"></i>
+      </div>
+      <div class="screen-info">
+        <h3 data-field="name"></h3>
+        <div class="screen-meta">
+          <span class="screen-type" data-field="type"></span>
+          <span class="screen-seats"><i class="fas fa-chair"></i> <span data-field="seats"></span> seats</span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Time Slot Template -->
+  <template id="time-slot-template">
+    <button type="button" class="time-slot-btn" data-time></button>
+  </template>
+
+  <!-- Selected Time Item Template -->
+  <template id="selected-time-template">
+    <div class="selected-time-item">
+      <span class="time-text" data-field="time"></span>
+      <button type="button" class="btn-remove" data-action="remove">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </template>
+
+  <script src="../assets/js/jquery-1.9.1.min.js"></script>
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/auth-handler.js"></script>
+  <script src="assets/js/admin-common.js"></script>
+  <script src="assets/js/showtime-create.js"></script>
+</body>
+</html>
+
