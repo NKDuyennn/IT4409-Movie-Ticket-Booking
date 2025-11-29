@@ -1,0 +1,1165 @@
+/**
+ * Showtimes Management Page Styles
+ * Consistent with movies, cinemas and promotions styling
+ */
+
+/* Showtimes Table */
+.showtimes-table-container {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.showtimes-table-container .data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.showtimes-table-container .data-table thead {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.showtimes-table-container .data-table thead th {
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.showtimes-table-container .data-table thead th:first-child {
+    text-align: left;
+}
+
+.showtimes-table-container .data-table tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.2s ease;
+}
+
+.showtimes-table-container .data-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.showtimes-table-container .data-table tbody td {
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.showtimes-table-container .data-table tbody td:first-child {
+    text-align: left;
+}
+
+/* Time Badge */
+.time-badge {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-family: 'Courier New', monospace;
+}
+
+/* Price Badge */
+.price-badge {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Seats Badge */
+.seats-badge {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.status-scheduled {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-badge.status-completed {
+    background: rgba(107, 114, 128, 0.2);
+    color: #9ca3af;
+    border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+.status-badge.status-cancelled {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Filter Select */
+.filter-select {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: rgba(251, 191, 36, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Showtime Info Box */
+.showtime-info-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.showtime-info-box p {
+    margin: 0.5rem 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.showtime-info-box strong {
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.btn-icon:hover {
+    transform: translateY(-2px);
+}
+
+.btn-icon.btn-view {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.btn-icon.btn-view:hover {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.btn-icon.btn-edit {
+    background: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+}
+
+.btn-icon.btn-edit:hover {
+    background: rgba(251, 191, 36, 0.2);
+}
+
+.btn-icon.btn-view {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.btn-icon.btn-view:hover {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.btn-icon.btn-edit {
+    background: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+}
+
+.btn-icon.btn-edit:hover {
+    background: rgba(251, 191, 36, 0.2);
+}
+
+.btn-icon.btn-delete {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.btn-icon.btn-delete:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+/* ============================================
+   SHOWTIME CREATE PAGE STYLES
+   ============================================ */
+
+
+/* Override content section */
+.admin-main {
+    overflow-x: hidden;
+}
+
+.content-section {
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+/* Form Section - Simplified */
+.form-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-title i {
+    color: #fbbf24;
+    font-size: 0.9rem;
+}
+
+.required {
+    color: #ef4444;
+    font-size: 0.875rem;
+}
+
+/* Scroll Wrapper - Universal */
+.scroll-wrapper {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 0.75rem;
+}
+
+.scroll-container {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.25rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.scroll-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(251, 191, 36, 0.3);
+    border-radius: 3px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(251, 191, 36, 0.5);
+}
+
+.movie-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 0 0 160px;
+    min-width: 160px;
+    max-width: 160px;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(251, 191, 36, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card.selected {
+    border-color: rgba(251, 191, 36, 0.8);
+    background: rgba(251, 191, 36, 0.1);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+}
+
+.movie-poster {
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie-info {
+    padding: 0.75rem;
+}
+
+.movie-info h3 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: rgba(255, 255, 255, 0.95);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.movie-meta span {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.movie-meta .age-rating {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    font-weight: 600;
+}
+
+.movie-meta .duration {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.movie-meta .rating {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    font-weight: 600;
+}
+
+.movie-meta .rating i {
+    color: #fbbf24;
+}
+
+.movie-info .genre {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+
+.cinema-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    gap: 0.75rem;
+    flex: 0 0 240px;
+    min-width: 240px;
+    max-width: 240px;
+}
+
+.cinema-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(251, 191, 36, 0.5);
+}
+
+.cinema-card.selected {
+    border-color: rgba(251, 191, 36, 0.8);
+    background: rgba(251, 191, 36, 0.1);
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+}
+
+.cinema-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(251, 191, 36, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cinema-icon i {
+    font-size: 1.25rem;
+    color: #fbbf24;
+}
+
+.cinema-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cinema-info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: rgba(255, 255, 255, 0.95);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cinema-address,
+.cinema-city {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0.15rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cinema-meta {
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.screen-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    gap: 0.75rem;
+    flex: 0 0 200px;
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.screen-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(251, 191, 36, 0.5);
+}
+
+.screen-card.selected {
+    border-color: rgba(251, 191, 36, 0.8);
+    background: rgba(251, 191, 36, 0.1);
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+}
+
+.screen-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.screen-icon i {
+    font-size: 1.15rem;
+    color: #3b82f6;
+}
+
+.screen-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.screen-info h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.95);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.screen-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-start;
+}
+
+.screen-type {
+    padding: 0.2rem 0.5rem;
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.screen-seats {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    line-height: 1.4;
+}
+
+.screen-seats i {
+    font-size: 0.7rem;
+}
+
+.date-input {
+    padding: 0.65rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    max-width: 250px;
+}
+
+.date-input:focus {
+    outline: none;
+    border-color: rgba(251, 191, 36, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Time & Price Wrapper - Simplified */
+.time-price-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.time-slots-box {
+    flex: 1;
+}
+
+.time-slots-box label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.time-slots-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.time-slot-btn {
+    padding: 0.65rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.time-slot-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.time-slot-btn.selected {
+    background: rgba(251, 191, 36, 0.2);
+    border-color: rgba(251, 191, 36, 0.8);
+    color: #fbbf24;
+}
+
+/* Price Box - Simplified */
+.price-box {
+    min-width: 180px;
+}
+
+.price-box label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.price-input {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.price-input:focus {
+    outline: none;
+    border-color: rgba(251, 191, 36, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: rgba(251, 191, 36, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+}
+
+.form-text {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Selected Times Box */
+.selected-times-box {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+}
+
+.selected-times-box label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.selected-times-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.selected-time-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(251, 191, 36, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 6px;
+}
+
+.selected-time-item .time-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fbbf24;
+    font-family: 'Courier New', monospace;
+}
+
+.selected-time-item .btn-remove {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(239, 68, 68, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: #ef4444;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.7rem;
+}
+
+.selected-time-item .btn-remove:hover {
+    background: rgba(239, 68, 68, 0.3);
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex !important;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 10000;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.modal-header .close {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-header .close:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body p {
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.modal-body .warning-text {
+    color: #ef4444;
+    font-weight: 500;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================
+   SHOWTIME VIEW & EDIT PAGE STYLES
+   ============================================ */
+
+/* View Info Container */
+.view-info-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+}
+
+.view-info-card {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.05) 0%, rgba(251, 191, 36, 0.02) 100%);
+    border: 1px solid rgba(251, 191, 36, 0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.view-info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(251, 191, 36, 0.1);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.view-info-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    background: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+}
+
+.view-info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.view-info-content label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.view-info-content strong {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+}
+
+.time-highlight {
+    color: #fbbf24 !important;
+    font-size: 1.3rem !important;
+}
+
+.price-highlight {
+    color: #10b981 !important;
+    font-size: 1.3rem !important;
+}
+
+.seats-highlight {
+    color: #3b82f6 !important;
+    font-size: 1.3rem !important;
+}
+
+.status-badge-large {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Status Info Box */
+.status-info-box {
+    background: rgba(59, 130, 246, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.status-info-box h4 {
+    color: #3b82f6;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-info-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.status-info-box li {
+    padding: 0.75rem 0;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status-info-box li:last-child {
+    border-bottom: none;
+}
+
+.status-badge-small {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 100px;
+    text-align: center;
+}
+
+/* Info Grid (for edit page) */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-item label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-item label i {
+    color: #fbbf24;
+    font-size: 0.9rem;
+}
+
+.info-item strong {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Header Title Actions */
+.header-title-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.header-title-actions h1 {
+    margin: 0;
+}
+
+/* Form Row */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Form Row Compact - for edit page */
+.form-row-compact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group label i {
+    color: #fbbf24;
+    font-size: 0.85rem;
+}
+
+.form-input,
+.time-select,
+.status-select {
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.form-input:hover,
+.time-select:hover,
+.status-select:hover {
+    border-color: rgba(251, 191, 36, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-input:focus,
+.time-select:focus,
+.status-select:focus {
+    outline: none;
+    border-color: rgba(251, 191, 36, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+select.form-input,
+.time-select,
+.status-select {
+    cursor: pointer;
+}
+
+.help-text {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(59, 130, 246, 0.08);
+    border-left: 4px solid #3b82f6;
+    border-radius: 8px;
+}
+
+.help-text i {
+    margin-right: 0.5rem;
+    color: #3b82f6;
+}
+
+/* Required indicator */
+.required {
+    color: #ef4444;
+    font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .time-price-wrapper {
+        flex-direction: column;
+    }
+    
+    .header-title-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .movie-card {
+        width: 150px;
+    }
+    
+    .movie-poster {
+        height: 200px;
+    }
+    
+    .time-slots-list {
+        justify-content: center;
+    }
+    
+    .time-slot-btn {
+        min-width: 100px;
+        padding: 0.875rem 1.25rem;
+        font-size: 1rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-width: none;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
